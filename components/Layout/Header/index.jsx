@@ -1,7 +1,7 @@
 import { HeaderContainer, IconContainer } from "./styles"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { Flex } from '../../Containers'
+import { ClickableDiv, Flex } from '../../Containers'
 
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -12,40 +12,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { MenuList } from "@material-ui/core";
 
+import NextLink from 'next/link'
+import { UserContext } from '../../../contexts/UserContext'
 
-// const StyledMenu = withStyles({
-//     paper: {
-//       border: '1px solid #d3d4d5',
-//     },
-//   })((props) => (
-//     <MenuList
-//       elevation={0}
-//       getContentAnchorEl={null}
-//       anchorOrigin={{
-//         vertical: 'bottom',
-//         horizontal: 'center',
-//       }}
-//       transformOrigin={{
-//         vertical: 'top',
-//         horizontal: 'center',
-//       }}
-//       {...props}
-//     />
-//   ));
-  
-//   const StyledMenuItem = withStyles((theme) => ({
-//     root: {
-//       '&:focus': {
-//         backgroundColor: theme.palette.primary.main,
-//         '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-//           color: theme.palette.common.white,
-//         },
-//       },
-//     },
-//   }))(MenuItem);
 
 
 const useStyles = makeStyles((theme) => ({
@@ -65,6 +37,8 @@ const Header = () => {
     const [accountOpen, setAccountOpen] = useState(false);
     const accountAnchorRef = useRef(null);
     const cartAnchorRef = useRef(null);
+
+    const { user, logout } = useContext(UserContext)
 
     const handleToggle = (button) => {
         switch (button) {
@@ -125,7 +99,11 @@ const Header = () => {
 
     return (
         <HeaderContainer>
-            <h1>Lumiverso</h1>
+            <NextLink href='/'>
+                <ClickableDiv>
+                    <h1>Lumiverso</h1>
+                </ClickableDiv>
+            </NextLink>
             <Flex>
                 <Button
                     ref={accountAnchorRef}
@@ -143,11 +121,19 @@ const Header = () => {
                         >
                             <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
-                                    <MenuList autoFocusItem={accountOpen} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                        <MenuItem onClick={handleClose}>Perfil</MenuItem>
-                                        <MenuItem onClick={handleClose}>Minha conta</MenuItem>
-                                        <MenuItem onClick={handleClose}>Logout</MenuItem>
-                                    </MenuList>
+                                    { user ? (
+                                        <MenuList autoFocusItem={accountOpen} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                                            <MenuItem onClick={handleClose}>Perfil</MenuItem>
+                                            <MenuItem onClick={handleClose}>Minha conta</MenuItem>
+                                            <MenuItem onClick={logout}>Logout</MenuItem>
+                                        </MenuList>
+                                    ) : (
+                                        <MenuList autoFocusItem={accountOpen} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                                            <NextLink href='/login'>
+                                                <MenuItem onClick={handleClose}>Entre na sua conta</MenuItem>
+                                            </NextLink>
+                                        </MenuList>
+                                    )}
                                 </ClickAwayListener>
                             </Paper>
                         </Grow>

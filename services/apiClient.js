@@ -21,5 +21,7 @@ export const apiClient = (method, url, { body, ...customConfig } = {}) => {
         }
     }
 
-    return axios[method](url, body, { ...config })
+    const fullUrl = 'http://localhost:4000' + url
+
+    return axios[method](fullUrl, body, { ...config })
 }

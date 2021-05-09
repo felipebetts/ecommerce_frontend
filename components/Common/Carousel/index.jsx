@@ -23,18 +23,18 @@ const DotsItem = ({ isActive }) => {
 }
     
 
-const Carousel = ({ items }) => {
+const Carousel = ({ items, autoPlay = true, disableDotsControls = true, infinite = true }) => {
     return (
         <AliceCarousel
             mouseTracking
             items={ items ? items : defaultItems }
             responsive={responsive}
             disableButtonsControls
-            autoPlay
+            autoPlay={autoPlay}
             autoPlayInterval={2500}
-            infinite
-            disableDotsControls
-            // renderDotsItem={params => DotsItem(params)}
+            infinite={infinite}
+            disableDotsControls={disableDotsControls}
+            renderDotsItem={params => DotsItem(params)}
         />
     )
 }
