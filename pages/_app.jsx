@@ -1,5 +1,6 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { UserProvider } from '../contexts/UserContext'
+import Head from 'next/head'
 
 const theme = {
   colors: {
@@ -35,15 +36,18 @@ const GlobalStyle = createGlobalStyle`
 function MyApp({ Component, pageProps }) {
   return (
     <>
-        <UserProvider>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
+      <UserProvider>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <Head>
+            <title>Lumiverso</title>
+          </Head>
           <Component {...pageProps} />
-      </ThemeProvider>
-        </UserProvider>
+        </ThemeProvider>
+      </UserProvider>
     </>
   )
-  
+
 }
 
 export default MyApp
