@@ -17,6 +17,7 @@ import { MenuList } from "@material-ui/core";
 
 import NextLink from 'next/link'
 import { UserContext } from '../../../contexts/UserContext'
+import { getUserCart } from "../../../services/cartClient";
 
 
 
@@ -38,7 +39,31 @@ const Header = () => {
     const accountAnchorRef = useRef(null);
     const cartAnchorRef = useRef(null);
 
+    const [cart, setCart] = useState(false);
+
+
     const { user, logout } = useContext(UserContext)
+
+    const getCart = () => {
+        if (user) {
+            getUserCart(user.id)
+                .then(res => {
+                    if (res && res.data) {
+                        setCart(res.data)
+                    }
+                })
+        }
+    }
+
+    useEffect(() => {
+        getCart()
+    }, [user])
+
+    useEffect(() => {
+        if (cart) {
+            console.log('cart: ', cart)
+        }
+    }, [cart])
 
     const handleToggle = (button) => {
         switch (button) {
@@ -58,16 +83,16 @@ const Header = () => {
             setCartOpen(false);
             return;
         }
-        
+
         if (cartAnchorRef.current && cartAnchorRef.current.contains(event.target)) {
             setAccountOpen(false);
             return;
         }
-        
+
         setCartOpen(false);
         setAccountOpen(false);
     };
-    
+
     function handleListKeyDown(event) {
         if (event.key === 'Tab') {
             event.preventDefault();
@@ -121,7 +146,7 @@ const Header = () => {
                         >
                             <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
-                                    { user ? (
+                                    {user ? (
                                         <MenuList autoFocusItem={accountOpen} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                             <MenuItem onClick={handleClose}>Perfil</MenuItem>
                                             <MenuItem onClick={handleClose}>Minha conta</MenuItem>
@@ -143,7 +168,10 @@ const Header = () => {
                     ref={cartAnchorRef}
                     aria-controls={cartOpen ? 'menu-list-grow' : undefined}
                     aria-haspopup="true"
-                    onClick={() => handleToggle('cart')}
+                    onClick={async () => {
+                        await getCart()
+                        return handleToggle('cart')
+                    }}
                 >
                     <ShoppingCartIcon />
                 </Button>
@@ -155,17 +183,39 @@ const Header = () => {
                         >
                             <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
-                                    <MenuList autoFocusItem={cartOpen} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                        <MenuItem>
-                                            Entre na sua conta
-                                        </MenuItem>
-                                        <MenuItem>
-                                            para adicionar itens 
-                                        </MenuItem>
-                                        <MenuItem>
-                                            no carrinho
-                                        </MenuItem>
-                                    </MenuList>
+
+                                    {cart ? (
+                                        <Flex column>
+                                            { cart.map((e, i) => (
+                                                <div>
+                                                    <div>
+                                                        {e.name}
+                                                    </div>
+                                                    <div>
+                                                        R${e.price}
+                                                    </div>
+                                                    <div>
+                                                        {e.quantity}
+                                                    </div>
+                                                </div>
+                                            ))}
+
+                                        </Flex>
+                                    ) : (
+                                        <MenuList autoFocusItem={cartOpen} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                                            <MenuItem>
+                                                Entre na sua conta
+                                           </MenuItem>
+                                            <MenuItem>
+                                                para adicionar itens
+                                           </MenuItem>
+                                            <MenuItem>
+                                                no carrinho
+                                           </MenuItem>
+                                        </MenuList>
+                                    )}
+
+
                                 </ClickAwayListener>
                             </Paper>
                         </Grow>

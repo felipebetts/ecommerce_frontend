@@ -25,8 +25,8 @@ const GlobalStyle = createGlobalStyle`
   html, body {
     margin: 0;
     padding: 0;
-    background: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.font};
+    background: #eee;
+    color: #333;
 
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -37,11 +37,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <UserProvider>
+        <GlobalStyle />
+        <Head>
+          <title>Lumiverso</title>
+        </Head>
         <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <Head>
-            <title>Lumiverso</title>
-          </Head>
           <Component {...pageProps} />
         </ThemeProvider>
       </UserProvider>
