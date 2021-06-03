@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
     padding: 0 5%;
+    width: 100%;
 
     position: -webkit-sticky; /* Safari */
     position: sticky;

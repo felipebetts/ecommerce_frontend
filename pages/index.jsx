@@ -2,13 +2,14 @@ import { useContext, useEffect, useState } from "react"
 // import Button from "../components/Common/Button"
 import Card from "../components/Common/Card"
 import Carousel from "../components/Common/Carousel"
-import { CardsContainer, Flex, MainContainer } from "../components/Containers"
+import { Box, CardsContainer, Flex, MainContainer } from "../components/Containers"
 import Footer from "../components/Layout/Footer"
 import Header from "../components/Layout/Header"
 import Nav from "../components/Layout/Nav"
 import { apiClient } from "../services/apiClient"
 import { localStorageUserId } from "../utils/constants"
 import { UserContext } from '../contexts/UserContext'
+import PageWrapper from "../templates/PageWrapper"
 
 
 const Main = () => {
@@ -51,10 +52,7 @@ const Main = () => {
     }
 
     return (
-        <>
-            <Header />
-            <Nav />
-            {/* width="100%" margin='auto' */}
+        <PageWrapper>
             <Flex>
             <Carousel />
             </Flex>
@@ -77,8 +75,7 @@ const Main = () => {
                     Load More
                 </Button> */}
             </Flex>
-            <Footer />
-        </>
+        </PageWrapper>
     )
 }
 

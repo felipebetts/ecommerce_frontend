@@ -13,7 +13,9 @@ const Nav = () => {
 
     return (
         <NavContainer>
-            <Flex>
+            <Flex
+                width='100%'
+            >
                 { items.map((e, i) => (
                     <NavItem key={i}>{e}</NavItem>
                 ))}

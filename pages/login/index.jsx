@@ -3,12 +3,15 @@ import Header from '../../components/Layout/Header'
 import Footer from '../../components/Layout/Footer'
 import { InputContainer, LoginContainer, LoginForm } from '../../components/pageSpecific/Login/styles'
 // import Button from '../../components/Common/Button'
+import Input from '../../components/form/Input'
 
 import NextLink from 'next/link'
 import { useState } from 'react'
 import { apiClient } from '../../services/apiClient'
 import { AUTH_TOKEN, localStorageUserId } from '../../utils/constants'
 import { useRouter } from 'next/router'
+import PageWrapper from '../../templates/PageWrapper'
+import { User, Eye, EyeClosed } from 'phosphor-react'
 
 
 const Login = () => {
@@ -16,15 +19,17 @@ const Login = () => {
     const router = useRouter()
 
     const [registerMode, setRegisterMode] = useState(false)
-    const [userRegister, setUserRegister] = useState({
-        name: null,
-        email: null,
-        password: null
-    })
-    const [userLogin, setUserLogin] = useState({
-        usernameOrEmail: null,
-        password: null
-    })
+
+    const [viewPassword, setViewPassword] = useState(false);
+
+    const [loginError, setLoginError] = useState(false)
+    const [loginErrorMessage, setLoginErrorMessage] = useState(null)
+
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [loginPassword, setLoginPassword] = useState('')
+    const [usernameOrEmail, setUsernameOrEmail] = useState('')
+    const [registerPassword, setRegisterPassword] = useState('')
 
     const handleRegister = () => {
         console.log(userRegister)
@@ -67,8 +72,7 @@ const Login = () => {
     }
 
     return (
-        <>
-            <Header />
+        <PageWrapper noNav>
             <MainContainer>
                 <Flex column>
                     <LoginContainer>
@@ -76,46 +80,7 @@ const Login = () => {
                             <>
                                 <h2>Crie uma conta</h2>
                                 <LoginForm>
-                                    <InputContainer>
-                                        {/* <TextField
-                                            name='name' 
-                                            id='username'
-                                            label='Usuário'
-                                            variant='outlined'
-                                            value={userRegister.name}
-                                            onChange={(e) => setUserRegister({
-                                                ...userRegister,
-                                                [e.target.name]: e.target.value
-                                            })}
-                                        /> */}
-                                    </InputContainer>
-                                    <InputContainer>
-                                        {/* <TextField
-                                            name='email' 
-                                            id='email'
-                                            label='Email'
-                                            variant='outlined'
-                                            value={userRegister.email}
-                                            onChange={(e) => setUserRegister({
-                                                ...userRegister,
-                                                [e.target.name]: e.target.value
-                                            })}
-                                        /> */}
-                                    </InputContainer>
-                                    <InputContainer>
-                                        {/* <TextField
-                                            name='password' 
-                                            id='password'
-                                            label='Senha'
-                                            variant='outlined'
-                                            type='password'
-                                            value={userRegister.password}
-                                            onChange={(e) => setUserRegister({
-                                                ...userRegister,
-                                                [e.target.name]: e.target.value
-                                            })}
-                                        /> */}
-                                    </InputContainer>
+                                    <Input />
                                 </LoginForm>
                                 <Flex margin='15px 0 30px'>
                                     {/* <Button
@@ -126,48 +91,52 @@ const Login = () => {
                                         Criar
                                 </Button> */}
                                 </Flex>
-                                <Divider />
                                 <Flex margin='20px 0 0'>
-                                    <Link style={{ cursor: 'pointer' }} onClick={() => setRegisterMode(!registerMode)}>
-                                        Já tem uma conta? Entre na sua conta aqui
-                                </Link>
+                                    Já tem uma conta? Entre na sua conta aqui
+                                    {/* <Link style={{ cursor: 'pointer' }} onClick={() => setRegisterMode(!registerMode)}>
+                                </Link> */}
                                 </Flex>
                             </>
                         ) : (
                             <>
                                 <h2>Entre na sua conta</h2>
                                 <LoginForm>
-                                    <InputContainer>
-                                        {/* <TextField
-                                            name='usernameOrEmail'
-                                            id='usernameOrEmail'
-                                            label='Usuário ou email'
-                                            variant='outlined'
-                                            value={userLogin.usernameOrEmail}
-                                            onChange={(e) => {
-                                                setUserLogin({
-                                                    ...userLogin,
-                                                    [e.target.name]: e.target.value
-                                                })
-                                            }}
-                                        /> */}
-                                    </InputContainer>
-                                    <InputContainer>
-                                        {/* <TextField
-                                            name='password'
-                                            id='password'
-                                            label='Senha'
-                                            variant='outlined'
-                                            value={userLogin.password}
-                                            onChange={(e) => {
-                                                setUserLogin({
-                                                    ...userLogin,
-                                                    [e.target.name]: e.target.value
-                                                })
-                                            }}
-                                            type='password' 
-                                        /> */}
-                                    </InputContainer>
+                                    <Input
+                                        label='Email ou Usuário'
+                                        placeholder='Insira o seu email ou usuário'
+                                        value={usernameOrEmail}
+                                        onChange={e => setUsernameOrEmail(e.target.value)}
+                                        Icon={User}
+                                    />
+                                    {viewPassword ? (
+                                        <Input
+                                            id="loginPassword"
+                                            type="text"
+                                            value={loginPassword}
+                                            onChange={e => setLoginPassword(e.target.value)}
+                                            placeholder="Insira sua senha"
+                                            label="Senha"
+                                            Icon={Eye}
+                                            iconIsButton
+                                            onIconButtonClick={() => setViewPassword(false)}
+                                            error={loginError}
+                                            assistentText={loginErrorMessage}
+                                        />
+                                    ) : (
+                                        <Input
+                                            id="loginPassword"
+                                            type="password"
+                                            value={loginPassword}
+                                            onChange={e => setLoginPassword(e.target.value)}
+                                            placeholder="Insira sua senha"
+                                            label="Senha"
+                                            Icon={EyeClosed}
+                                            iconIsButton
+                                            onIconButtonClick={() => setViewPassword(true)}
+                                            error={loginError}
+                                            assistentText={loginErrorMessage}
+                                        />
+                                    )}
                                 </LoginForm>
                                 <Flex margin='15px 0 30px'>
                                     {/* <Button
@@ -178,13 +147,13 @@ const Login = () => {
                                         Entrar
                                 </Button> */}
                                 </Flex>
-                                <Divider />
+                                {/* <Divider /> */}
                                 <Flex margin='20px 0 0'>
-                                    <Link style={{ cursor: 'pointer' }} onClick={() => {
+                                    {/* <Link style={{ cursor: 'pointer' }} onClick={() => {
                                         setRegisterMode(!registerMode)
-                                    }}>
+                                    }}> */}
                                         Não tem uma conta? Crie uma conta aqui
-                                    </Link>
+                                    {/* </Link> */}
                                 </Flex>
                             </>
                         )}
@@ -192,8 +161,7 @@ const Login = () => {
                     </LoginContainer>
                 </Flex>
             </MainContainer>
-            <Footer />
-        </>
+        </PageWrapper>
     )
 }
 
