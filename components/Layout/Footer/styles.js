@@ -8,6 +8,6 @@ export const FooterContainer = styled.footer`
     align-items: center;
     justify-content: center;
 
-    border-top: 1px solid ${({ theme }) => theme.colors.border};
+    border-top: 1px solid ${({ theme }) => theme.colors.text.neutral400};
 
 `

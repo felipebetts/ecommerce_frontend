@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import Button from "../components/Common/Button"
+// import Button from "../components/Common/Button"
 import Card from "../components/Common/Card"
 import Carousel from "../components/Common/Carousel"
 import { CardsContainer, Flex, MainContainer } from "../components/Containers"
@@ -68,14 +68,14 @@ const Main = () => {
                 </CardsContainer>
             </MainContainer>
             <Flex margin='20px'>
-                <Button
+                {/* <Button
                     onClick={() => {
                         console.log('click')
                         handleLoadMore()
                     }}
                 >
                     Load More
-                </Button>
+                </Button> */}
             </Flex>
             <Footer />
         </>

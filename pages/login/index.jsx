@@ -2,8 +2,7 @@ import { MainContainer, Flex } from '../../components/Containers'
 import Header from '../../components/Layout/Header'
 import Footer from '../../components/Layout/Footer'
 import { InputContainer, LoginContainer, LoginForm } from '../../components/pageSpecific/Login/styles'
-import { Divider, Link, TextField } from '@material-ui/core'
-import Button from '../../components/Common/Button'
+// import Button from '../../components/Common/Button'
 
 import NextLink from 'next/link'
 import { useState } from 'react'
@@ -78,7 +77,7 @@ const Login = () => {
                                 <h2>Crie uma conta</h2>
                                 <LoginForm>
                                     <InputContainer>
-                                        <TextField
+                                        {/* <TextField
                                             name='name' 
                                             id='username'
                                             label='Usuário'
@@ -88,10 +87,10 @@ const Login = () => {
                                                 ...userRegister,
                                                 [e.target.name]: e.target.value
                                             })}
-                                        />
+                                        /> */}
                                     </InputContainer>
                                     <InputContainer>
-                                        <TextField
+                                        {/* <TextField
                                             name='email' 
                                             id='email'
                                             label='Email'
@@ -101,10 +100,10 @@ const Login = () => {
                                                 ...userRegister,
                                                 [e.target.name]: e.target.value
                                             })}
-                                        />
+                                        /> */}
                                     </InputContainer>
                                     <InputContainer>
-                                        <TextField
+                                        {/* <TextField
                                             name='password' 
                                             id='password'
                                             label='Senha'
@@ -115,17 +114,17 @@ const Login = () => {
                                                 ...userRegister,
                                                 [e.target.name]: e.target.value
                                             })}
-                                        />
+                                        /> */}
                                     </InputContainer>
                                 </LoginForm>
                                 <Flex margin='15px 0 30px'>
-                                    <Button
+                                    {/* <Button
                                         onClick={() => {
                                             handleRegister()
                                         }}
                                     >
                                         Criar
-                                </Button>
+                                </Button> */}
                                 </Flex>
                                 <Divider />
                                 <Flex margin='20px 0 0'>
@@ -139,7 +138,7 @@ const Login = () => {
                                 <h2>Entre na sua conta</h2>
                                 <LoginForm>
                                     <InputContainer>
-                                        <TextField
+                                        {/* <TextField
                                             name='usernameOrEmail'
                                             id='usernameOrEmail'
                                             label='Usuário ou email'
@@ -151,10 +150,10 @@ const Login = () => {
                                                     [e.target.name]: e.target.value
                                                 })
                                             }}
-                                        />
+                                        /> */}
                                     </InputContainer>
                                     <InputContainer>
-                                        <TextField
+                                        {/* <TextField
                                             name='password'
                                             id='password'
                                             label='Senha'
@@ -167,17 +166,17 @@ const Login = () => {
                                                 })
                                             }}
                                             type='password' 
-                                        />
+                                        /> */}
                                     </InputContainer>
                                 </LoginForm>
                                 <Flex margin='15px 0 30px'>
-                                    <Button
+                                    {/* <Button
                                         onClick={() => {
                                             handleLogin()
                                         }}
                                     >
                                         Entrar
-                                </Button>
+                                </Button> */}
                                 </Flex>
                                 <Divider />
                                 <Flex margin='20px 0 0'>

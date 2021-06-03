@@ -13,20 +13,20 @@ export const CardContainer = styled.div`
 
     cursor: pointer;
     
-    -webkit-box-shadow: ${({ theme }) => theme.boxShadow.primary};
-    box-shadow: ${({ theme }) => theme.boxShadow.primary};
+    -webkit-box-shadow: ${({ theme }) => theme.boxShadow};
+    box-shadow: ${({ theme }) => theme.boxShadow};
     
     transition-duration: 0.5s;
     
-    &:hover {
+    &:active, &:focus {
         -webkit-box-shadow: none;
         box-shadow: none;
     }
     
-    &:active, &:focus {
-        -webkit-box-shadow: ${({ theme }) => theme.boxShadow.inset};
-        box-shadow: ${({ theme }) => theme.boxShadow.inset};
-    }
+    // &:active, &:focus {
+    //     -webkit-box-shadow: ${({ theme }) => theme.boxShadow.inset};
+    //     box-shadow: ${({ theme }) => theme.boxShadow.inset};
+    // }
 `
 // 
 export const CardImage = styled.div`

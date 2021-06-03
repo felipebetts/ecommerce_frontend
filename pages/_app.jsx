@@ -4,17 +4,34 @@ import Head from 'next/head'
 
 const theme = {
   colors: {
+    primary: {
+      ocean: '#03BAFF',
+      blue: '#5150E9',
+      purple: '#5823E3',
+      dark: '#0F0029',
+    },
+    text: {
+      neutral600: '#333A46',
+      neutral400: '#7E8AA4',
+      neutral200: '#C5CEE0',
+      white: '#FFFFFF'
+    },
+    status: {
+      destructive: '#E13600',
+      warning: '#FFB800',
+      success: '#049601'
+    },
+    cards: {
+      neutral40: '#F7F9FC',
+      neutral60: '#E4E9F2',
+    },
+    button: {
+      primary: '#5823E3',
+      disabled: '#E4E9F2'
+    },
     background: '#eee',
-    font: '#333',
-    border: '#bcbcbc'
   },
-  boxShadow: {
-    primary: `  
-    5px 5px 15px 5px rgba(0,0,0,0.15)
-    `,
-    bottom: '0 8px 6px -6px black',
-    inset: 'inset 0 0 10px rgba(0,0,0,0.35)'
-  },
+  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.16)',
 }
 
 const GlobalStyle = createGlobalStyle`

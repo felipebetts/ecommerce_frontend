@@ -3,12 +3,11 @@ import { Flex, MainContainer } from "../../components/Containers"
 import Footer from "../../components/Layout/Footer"
 import Header from "../../components/Layout/Header"
 import Nav from "../../components/Layout/Nav"
-import Button from '../../components/Common/Button'
+// import Button from '../../components/Common/Button'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from "react"
 import { ProductCarouselContainer, ProductCarouselItem, ProductInfo } from "../../components/pageSpecific/Product/styles"
 import { apiClient } from "../../services/apiClient"
-import { CircularProgress } from "@material-ui/core"
 import { UserContext } from '../../contexts/UserContext'
 
 
@@ -77,7 +76,7 @@ const Product = () => {
                             />
                         </ProductCarouselContainer>
                         <ProductInfo noProduct>
-                            <CircularProgress />
+                            {/* <CircularProgress /> */}
                         </ProductInfo>
                     </Flex>
                 </MainContainer>
@@ -137,14 +136,14 @@ const Product = () => {
                         <p>{product.description}</p>
                         <Flex column>
                             <p> <strong>R$ {product.price}</strong></p>
-                            <Button
+                            {/* <Button
                                 onClick={() => {
                                     console.log('add to cart')
                                     handleAddToCart()
                                 }}
                             >
                                 Adicionar ao carrinho
-                            </Button>
+                            </Button> */}
                         </Flex>
                     </ProductInfo>
                 </Flex>
