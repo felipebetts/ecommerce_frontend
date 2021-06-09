@@ -5,7 +5,7 @@ import { UserContext } from '../../../contexts/UserContext'
 import { getUserCart } from "../../../services/cartClient";
 import { useContext, useEffect, useState } from "react";
 import { ShoppingCartSimple } from 'phosphor-react'
-import Button from '../../Common/Button'
+import DropdownButton from '../../Common/DropdownButton'
 import { useRouter } from "next/router";
 
 const Header = () => {
@@ -45,13 +45,24 @@ const Header = () => {
                 </ClickableDiv>
             </NextLink>
             <Flex>
-                <Button
+                <DropdownButton
+                    id='user_account_dropdown_button'
                     tertiary
                     padding='0 15px'
-                    onClick={() => router.push('/cart')}
+                    width='50px'
+                    // onClick={() => router.push('/cart')}
                 >
                     <ShoppingCartSimple size={24} />
-                </Button>
+                </DropdownButton>
+                <DropdownButton
+                    id='cart_dropdown_button'
+                    tertiary
+                    padding='0 15px'
+                    width='50px'
+                    // onClick={() => router.push('/cart')}
+                >
+                    <ShoppingCartSimple size={24} />
+                </DropdownButton>
             </Flex>
         </HeaderContainer>
     )
