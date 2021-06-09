@@ -1,5 +1,6 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { UserProvider } from '../contexts/UserContext'
+import { DropdownButtonContextProvider } from '../contexts/DropdownButtonContext'
 import Head from 'next/head'
 
 const theme = {
@@ -53,14 +54,16 @@ const GlobalStyle = createGlobalStyle`
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      <GlobalStyle />
+      <Head>
+        <title>Lumiverso</title>
+      </Head>
       <UserProvider>
-        <GlobalStyle />
-        <Head>
-          <title>Lumiverso</title>
-        </Head>
-        <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <DropdownButtonContextProvider>
+          <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </DropdownButtonContextProvider>
       </UserProvider>
     </>
   )

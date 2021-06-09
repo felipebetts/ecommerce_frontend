@@ -4,13 +4,15 @@ import NextLink from 'next/link'
 import { UserContext } from '../../../contexts/UserContext'
 import { getUserCart } from "../../../services/cartClient";
 import { useContext, useEffect, useState } from "react";
-import { ShoppingCartSimple } from 'phosphor-react'
+import { ShoppingCartSimple, User } from 'phosphor-react'
 import DropdownButton from '../../Common/DropdownButton'
 import { useRouter } from "next/router";
+import CartDropdownContent from "./CartDropdownContent";
+import UserAccountDropdownContent from "./UserAccountDropdownContent";
 
 const Header = () => {
 
-    const [cart, setCart] = useState(false);
+    const [cart, setCart] = useState(null);
 
     const router = useRouter()
 
@@ -50,18 +52,22 @@ const Header = () => {
                     tertiary
                     padding='0 15px'
                     width='50px'
+                    label={<User size={24} />}
                     // onClick={() => router.push('/cart')}
                 >
-                    <ShoppingCartSimple size={24} />
+                    <UserAccountDropdownContent />
                 </DropdownButton>
                 <DropdownButton
                     id='cart_dropdown_button'
                     tertiary
                     padding='0 15px'
                     width='50px'
+                    label={<ShoppingCartSimple size={24} />}
                     // onClick={() => router.push('/cart')}
                 >
-                    <ShoppingCartSimple size={24} />
+                    <CartDropdownContent
+                        cart={cart}
+                    />
                 </DropdownButton>
             </Flex>
         </HeaderContainer>

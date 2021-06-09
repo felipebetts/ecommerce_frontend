@@ -23,8 +23,9 @@ const Nav = () => {
                         id={`nav_item_${i}`}
                         key={`nav_item_${i}`}
                         // small
+                        label={<NavItem>{e}</NavItem>}
                     >
-                        <NavItem>{e}</NavItem>
+                        Produtos
                     </DropdownButton>
                 ))}
             </Flex>
