@@ -17,6 +17,7 @@ export const Flex = styled.div`
     ${(props) => props.justifyContent ? `justify-content: ${props.justifyContent};` : ''}
     ${(props) => props.alignItems ? `align-items: ${props.alignItems};` : ''}
     ${(props) => props.margin ? `margin: ${props.margin};` : ''}
+    ${(props) => props.height ? `height: ${props.height};` : ''}
     ${(props) => props.width ? `width: ${props.width};` : ''}
     ${(props) => props.grow ? `flex-grow: ${props.grow};` : ''}
     ${(props) => props.maxHeight ? `max-height: ${props.maxHeight};` : ''}

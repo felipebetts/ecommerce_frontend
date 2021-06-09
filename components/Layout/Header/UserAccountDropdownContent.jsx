@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { UserContext } from "../../../contexts/UserContext"
-import { Flex } from "../../Containers"
+import { Box, Flex } from "../../Containers"
 
 
 const UserAccountDropdownContent = () => {
@@ -12,9 +12,14 @@ const UserAccountDropdownContent = () => {
     return (
         <Flex 
             column
-            width='100%'
+            height='400px'
+            // width='100%'
         >
-            User
+            { user ? (
+                <Box> <p>User is logged in</p></Box>
+                ) : (
+                <Box> <p>User is not logged in</p></Box>
+            )}
         </Flex>
     )
 }

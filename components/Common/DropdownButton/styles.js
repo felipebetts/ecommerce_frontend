@@ -71,9 +71,10 @@ export const DropDownContainer = styled.div`
 
     padding: 1rem;
 
-    div:last-child {
+    div.card {
         width: 200px;
         border-radius: 8px;
+        // height: 100%;
 
         padding: 1rem;
     
@@ -83,7 +84,7 @@ export const DropDownContainer = styled.div`
         z-index: 4;
     }
     
-    div:first-child {
+    div.triangle {
         background: none;
         box-shadow: none;
 

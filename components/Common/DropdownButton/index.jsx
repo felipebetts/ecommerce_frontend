@@ -69,8 +69,8 @@ const DropdownButton = ({
                     left={left}
                     buttonWidth={buttonWidth}
                 >
-                    <div></div>
-                    <div>
+                    <div className='triangle'></div>
+                    <div className='card'>
                         { children }
                     </div>
                 </DropDownContainer>
