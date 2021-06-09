@@ -1,5 +1,6 @@
 import { Flex } from "../../Containers"
 import { NavContainer, NavItem } from "./styles"
+import DropdownButton from '../../Common/DropdownButton'
 
 
 const Nav = () => {
@@ -17,7 +18,14 @@ const Nav = () => {
                 width='100%'
             >
                 { items.map((e, i) => (
-                    <NavItem key={i}>{e}</NavItem>
+                    <DropdownButton
+                        tertiary
+                        id={`nav_item_${i}`}
+                        key={`nav_item_${i}`}
+                        // small
+                    >
+                        <NavItem>{e}</NavItem>
+                    </DropdownButton>
                 ))}
             </Flex>
         </NavContainer>

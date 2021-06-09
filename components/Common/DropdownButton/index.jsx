@@ -20,10 +20,10 @@ const DropdownButton = ({ id = 'dropdown_button', DropdownComponent, children, s
         <>
             <StyledButton
                 id={id}
-                secondary={secondary}
-                tertiary={tertiary}
-                disabled={disabled}
-                small={small}
+                // secondary={secondary}
+                // tertiary={tertiary}
+                // disabled={disabled}
+                // small={small}
                 fontSize={fontSize}
                 // width={width}
                 fullWidth={fullWidth}
