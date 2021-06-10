@@ -1,4 +1,4 @@
-import { Box } from "../../common/Containers"
+import { Box } from "../../Containers"
 import { AssistentP, IconButton, InputContainer, StyledInput, StyledLabel } from "./styles"
 import MaskedInput from 'react-text-mask'
 
@@ -66,7 +66,7 @@ const Input = ({
                     />
 
                     {Icon && (
-                        <IconButton isActive={iconIsButton} onClick={onIconButtonClick}>
+                        <IconButton type='button' isActive={iconIsButton} onClick={onIconButtonClick}>
                             <Icon size={24} weight="thin" />
                         </IconButton>
                     )}
@@ -106,7 +106,7 @@ const Input = ({
                     pattern={pattern}
                 />
                 {Icon && (
-                    <IconButton isActive={iconIsButton} onClick={onIconButtonClick}>
+                    <IconButton type='button' isActive={iconIsButton} onClick={onIconButtonClick}>
                         <Icon size={24} weight="thin" />
                     </IconButton>
                 )}

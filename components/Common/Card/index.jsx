@@ -5,11 +5,11 @@ import { Flex } from '../../Containers'
 import NextLink from 'next/link'
 
 
-const Card = ({ product }) => {
+const Card = ({ product, margin }) => {
 
     return (
         <NextLink href='/products/[id]' as={`/products/${product.id}`} key={product.id}>
-            <CardContainer>
+            <CardContainer margin={margin}>
                 <CardImage imageSrc="https://picsum.photos/270/140" />
                 <CardContent>
                     <h4 style={{ margin: '10px'}}>{ product.name }</h4> 

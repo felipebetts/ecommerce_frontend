@@ -2,7 +2,7 @@ import AliceCarousel from "react-alice-carousel"
 import "react-alice-carousel/lib/alice-carousel.css"
 import { CarouselItem, Dots } from "./styles";
 
-const responsive = {
+const defaultResponsive = {
     0: { items: 1 },
     // 568: { items: 2 },
     // 1024: { items: 3 },
@@ -23,7 +23,7 @@ const DotsItem = ({ isActive }) => {
 }
     
 
-const Carousel = ({ items, autoPlay = true, disableDotsControls = true, infinite = true }) => {
+const Carousel = ({ items, autoPlay = true, autoPlayInterval = 2500, disableDotsControls, infinite = true, responsive = defaultResponsive }) => {
     return (
         <AliceCarousel
             mouseTracking
@@ -31,7 +31,7 @@ const Carousel = ({ items, autoPlay = true, disableDotsControls = true, infinite
             responsive={responsive}
             disableButtonsControls
             autoPlay={autoPlay}
-            autoPlayInterval={2500}
+            autoPlayInterval={autoPlayInterval}
             infinite={infinite}
             disableDotsControls={disableDotsControls}
             renderDotsItem={params => DotsItem(params)}

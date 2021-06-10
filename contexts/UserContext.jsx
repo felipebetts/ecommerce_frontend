@@ -21,6 +21,11 @@ export const UserProvider = ({ children }) => {
     useEffect(() => {
         // const userId = localStorage.getItem(localStorageUserId)
         // console.log('userId: ', userId)
+        getCurrentUser()
+
+    }, [[], token])
+
+    const getCurrentUser = () => {
         setToken(localStorage.getItem(AUTH_TOKEN))
         console.log('token: ', token)
 
@@ -45,12 +50,13 @@ export const UserProvider = ({ children }) => {
                 })
 
         }
-    }, [[], token])
+    }
 
     return (
         <UserContext.Provider value={{
             user,
-            logout
+            logout,
+            getCurrentUser
         }}>
             { children }
         </UserContext.Provider>

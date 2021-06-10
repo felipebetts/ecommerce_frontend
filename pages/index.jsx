@@ -2,16 +2,30 @@ import { useContext, useEffect, useState } from "react"
 // import Button from "../components/Common/Button"
 import Card from "../components/Common/Card"
 import Carousel from "../components/Common/Carousel"
-import { CardsContainer, Flex, MainContainer } from "../components/Containers"
+import { Box, CardsContainer, Flex, MainContainer } from "../components/Containers"
 import Footer from "../components/Layout/Footer"
 import Header from "../components/Layout/Header"
 import Nav from "../components/Layout/Nav"
 import { apiClient } from "../services/apiClient"
 import { localStorageUserId } from "../utils/constants"
 import { UserContext } from '../contexts/UserContext'
+import PageWrapper from "../templates/PageWrapper"
+import Button from "../components/Common/Button"
+import { getPaginatedProductsByDate } from "../services/productClient"
+
+
+const responsive = {
+    0: { items: 1 },
+    568: { items: 2 },
+    786: { items: 3 },
+    1024: { items: 4 },
+};
 
 
 const Main = () => {
+
+    const [carouselProducts, setCarouselProducts] = useState(null)
+    const [spotlightProducts, setSpotlightProducts] = useState(null)
 
     const [products, setProducts] = useState(null)
     const { user } = useContext(UserContext)
@@ -28,6 +42,23 @@ const Main = () => {
                 console.log(err)
             })
     }, [])
+
+
+    useEffect(async () => {
+        const productsByDate = await getPaginatedProductsByDate(10)
+        if (productsByDate && productsByDate.data && productsByDate.data.products) {
+            setSpotlightProducts(productsByDate.data.products)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (spotlightProducts) {
+            const carouselItems = spotlightProducts.map((e, i) => (
+                <Card margin='20px auto' product={e} key={i} onClick={() => console.log('click')}/>
+            ))
+            setCarouselProducts(carouselItems)
+        }
+    }, [spotlightProducts])
 
     const handleLoadMore = () => {
         const cursor = { ...products[products.length - 1] }
@@ -51,12 +82,26 @@ const Main = () => {
     }
 
     return (
-        <>
-            <Header />
-            <Nav />
-            {/* width="100%" margin='auto' */}
+        <PageWrapper>
             <Flex>
-            <Carousel />
+            <Carousel
+                disableDotsControls
+            />
+            </Flex>
+            <Flex
+                column
+                width='100%'
+            >
+                <Flex
+                    width='90%'
+                    margin='30px 0 0 0'    
+                >
+                    <Carousel 
+                        items={carouselProducts ? carouselProducts : null}
+                        responsive={responsive}
+                        autoPlayInterval={3000}
+                    />
+                </Flex>
             </Flex>
             <MainContainer>
                 <CardsContainer>
@@ -68,17 +113,17 @@ const Main = () => {
                 </CardsContainer>
             </MainContainer>
             <Flex margin='20px'>
-                {/* <Button
+                <Button
+                    small
                     onClick={() => {
                         console.log('click')
                         handleLoadMore()
                     }}
                 >
                     Load More
-                </Button> */}
+                </Button>
             </Flex>
-            <Footer />
-        </>
+        </PageWrapper>
     )
 }
 

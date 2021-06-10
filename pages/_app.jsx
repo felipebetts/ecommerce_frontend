@@ -1,5 +1,6 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { UserProvider } from '../contexts/UserContext'
+import { DropdownButtonContextProvider } from '../contexts/DropdownButtonContext'
 import Head from 'next/head'
 
 const theme = {
@@ -45,7 +46,7 @@ const GlobalStyle = createGlobalStyle`
     background: #eee;
     color: #333;
 
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   }
 `
@@ -53,14 +54,16 @@ const GlobalStyle = createGlobalStyle`
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      <GlobalStyle />
+      <Head>
+        <title>Lumiverso</title>
+      </Head>
       <UserProvider>
-        <GlobalStyle />
-        <Head>
-          <title>Lumiverso</title>
-        </Head>
-        <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <DropdownButtonContextProvider>
+          <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </DropdownButtonContextProvider>
       </UserProvider>
     </>
   )
