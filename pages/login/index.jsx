@@ -12,6 +12,8 @@ import { AUTH_TOKEN, localStorageUserId } from '../../utils/constants'
 import { useRouter } from 'next/router'
 import PageWrapper from '../../templates/PageWrapper'
 import { User, Eye, EyeClosed } from 'phosphor-react'
+import Button from '../../components/Common/Button'
+import { login } from '../../services/authClient'
 
 
 const Login = () => {
@@ -31,35 +33,13 @@ const Login = () => {
     const [usernameOrEmail, setUsernameOrEmail] = useState('')
     const [registerPassword, setRegisterPassword] = useState('')
 
-    const handleRegister = () => {
-        console.log(userRegister)
-
-        const reqData = {
-            body: {
-                ...userRegister
-            }
-        }
-
-
-        apiClient('post', '/users/create', reqData)
-            .then(res => {
-                console.log(res)
-                if (res.status === 200 || res.status === 201) {
-                    setRegisterMode(false)
-                }
-            })
-    }
-
     const handleLogin = () => {
-        console.log(userLogin)
-
-        const reqData = {
-            body: {
-                ...userLogin
-            }
+        const userLogin = {
+            usernameOrEmail,
+            password: loginPassword
         }
 
-        apiClient('post', '/users/login', reqData)
+        login(userLogin)
             .then(res => {
                 console.log(res)
                 if (res.status === 200 || res.status === 201) {
@@ -139,13 +119,14 @@ const Login = () => {
                                     )}
                                 </LoginForm>
                                 <Flex margin='15px 0 30px'>
-                                    {/* <Button
+                                    <Button
+                                    small
                                         onClick={() => {
                                             handleLogin()
                                         }}
                                     >
                                         Entrar
-                                </Button> */}
+                                </Button>
                                 </Flex>
                                 {/* <Divider /> */}
                                 <Flex margin='20px 0 0'>

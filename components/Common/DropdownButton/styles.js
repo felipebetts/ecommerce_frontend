@@ -61,7 +61,7 @@ export const DropDownContainer = styled.div`
 
     position: absolute;
     top: 64px; 
-    ${(props) => !props.top ? '' : `top: ${props.top + 32}px;`}
+    ${(props) => !props.top ? '' : `top: ${props.top + 32 }px;`}
     ${(props) => !props.left ? '' : `left: ${props.left - 116 + (props.buttonWidth/2)}px;`}
 
     display: flex;
@@ -73,6 +73,8 @@ export const DropDownContainer = styled.div`
 
     div.card {
         width: 200px;
+        ${(props) => props.width ? `width: ${props.width};` : ''}
+
         border-radius: 8px;
         // height: 100%;
 

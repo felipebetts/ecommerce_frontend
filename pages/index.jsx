@@ -92,7 +92,10 @@ const Main = () => {
                 column
                 width='100%'
             >
-                <Flex width='90%'>
+                <Flex
+                    width='90%'
+                    margin='30px 0 0 0'    
+                >
                     <Carousel 
                         items={carouselProducts ? carouselProducts : null}
                         responsive={responsive}
