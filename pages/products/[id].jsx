@@ -9,6 +9,8 @@ import { useContext, useEffect, useState } from "react"
 import { ProductCarouselContainer, ProductCarouselItem, ProductInfo } from "../../components/pageSpecific/Product/styles"
 import { apiClient } from "../../services/apiClient"
 import { UserContext } from '../../contexts/UserContext'
+import Button from "../../components/Common/Button"
+import { addToCart } from "../../services/cartClient"
 
 
 const Product = () => {
@@ -43,17 +45,15 @@ const Product = () => {
     const handleAddToCart = () => {
         if (user && id) {
 
-            const reqData = {
-                body: {
-                    user_id: user.id,
-                    product_id: id
-                }
-            }
-
-            apiClient('post', '/carts/add', reqData)
+            addToCart(user.id, id)
                 .then(res => {
-                    console.log('res: ', res)
+                    if (res && res.data && res.status === 200) {
+                        console.log('res.data: ', res.data)
+                        router.reload()
+                    }
                 })
+
+            
         }
     }
 
@@ -136,14 +136,15 @@ const Product = () => {
                         <p>{product.description}</p>
                         <Flex column>
                             <p> <strong>R$ {product.price}</strong></p>
-                            {/* <Button
+                            <Button
+                                disabled={!user}
                                 onClick={() => {
                                     console.log('add to cart')
                                     handleAddToCart()
                                 }}
                             >
                                 Adicionar ao carrinho
-                            </Button> */}
+                            </Button>
                         </Flex>
                     </ProductInfo>
                 </Flex>
