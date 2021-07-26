@@ -52,7 +52,7 @@ const Login = () => {
     }
 
     return (
-        <PageWrapper noNav>
+        <PageWrapper>
             <MainContainer>
                 <Flex column>
                     <LoginContainer>

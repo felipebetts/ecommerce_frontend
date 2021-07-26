@@ -14,9 +14,7 @@ const PageWrapper = ({ children, noNav }) => {
         >
             <Box width='100%'>
                 <Header />
-                { noNav ? null : (
-                    <Nav />
-                )}
+                <Nav />
                 { children }
             </Box>
             {/* <Box width='100%'>

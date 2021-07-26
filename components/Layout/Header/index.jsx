@@ -9,6 +9,7 @@ import DropdownButton from '../../Common/DropdownButton'
 import { useRouter } from "next/router";
 import CartDropdownContent from "./CartDropdownContent";
 import UserAccountDropdownContent from "./UserAccountDropdownContent";
+import Button from "../../Common/Button";
 
 const Header = () => {
 
@@ -23,6 +24,7 @@ const Header = () => {
             getUserCart(user.id)
                 .then(res => {
                     if (res && res.data) {
+                        console.log()
                         setCart(res.data)
                     }
                 })
@@ -57,7 +59,7 @@ const Header = () => {
                 >
                     <UserAccountDropdownContent />
                 </DropdownButton>
-                <DropdownButton
+                {/* <DropdownButton
                     id='cart_dropdown_button'
                     tertiary
                     padding='0 15px'
@@ -68,7 +70,19 @@ const Header = () => {
                     <CartDropdownContent
                         cart={cart}
                     />
-                </DropdownButton>
+                </DropdownButton> */}
+                <Button
+                    tertiary
+                    padding='0 15px'
+                    width='50px'
+                    onClick={() => router.push('/cart')}
+                >
+                    <div 
+                        style={{ color: '#000' }}
+                    >
+                        <ShoppingCartSimple size={24} />
+                    </div>
+                </Button>
             </Flex>
         </HeaderContainer>
     )
