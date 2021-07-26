@@ -11,6 +11,8 @@ import { apiClient } from "../../services/apiClient"
 import { UserContext } from '../../contexts/UserContext'
 import Button from "../../components/Common/Button"
 import { addToCart } from "../../services/cartClient"
+import { useAlert } from 'react-alert'
+import { AlertMessageTemplate } from '../../config/alertConfig'
 
 
 const Product = () => {
@@ -22,6 +24,8 @@ const Product = () => {
     const { id } = router.query
 
     const { user } = useContext(UserContext)
+
+    const alert = useAlert()
 
     useEffect(async () => {
         const updatedItems = [
@@ -43,18 +47,19 @@ const Product = () => {
     }, [id])
 
     const handleAddToCart = () => {
-        if (user && id) {
-
-            addToCart(user.id, id)
-                .then(res => {
-                    if (res && res.data && res.status === 200) {
-                        console.log('res.data: ', res.data)
-                        router.reload()
-                    }
-                })
-
-            
-        }
+        addToCart(user.id, id)
+            .then(res => {
+                if (res && res.data && res.status === 200) {
+                    console.log('res.data: ', res.data)
+                    alert.success(<AlertMessageTemplate>Item adicionado ao carrinho!</AlertMessageTemplate>)
+                    // router.reload()
+                } else {
+                    alert.error(<AlertMessageTemplate>Erro: item não foi adicionado ao carrinho</AlertMessageTemplate>)
+                }
+            })
+            .catch(err => {
+                alert.error(<AlertMessageTemplate>Erro: item não foi adicionado ao carrinho</AlertMessageTemplate>)
+            })
     }
 
     if (!product && product !== 'null') {

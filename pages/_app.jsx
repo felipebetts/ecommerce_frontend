@@ -2,6 +2,9 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { UserProvider } from '../contexts/UserContext'
 import { DropdownButtonContextProvider } from '../contexts/DropdownButtonContext'
 import Head from 'next/head'
+import { Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+import { alertOptions } from '../config/alertConfig'
 
 const theme = {
   colors: {
@@ -58,13 +61,15 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Lumiverso</title>
       </Head>
-      <UserProvider>
-        <DropdownButtonContextProvider>
-          <ThemeProvider theme={theme}>
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </DropdownButtonContextProvider>
-      </UserProvider>
+      <AlertProvider template={AlertTemplate} { ...alertOptions }>
+        <UserProvider>
+          <DropdownButtonContextProvider>
+            <ThemeProvider theme={theme}>
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </DropdownButtonContextProvider>
+        </UserProvider>
+      </AlertProvider>
     </>
   )
 
