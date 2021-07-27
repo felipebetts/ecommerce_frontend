@@ -41,13 +41,9 @@ const Login = () => {
 
         login(userLogin)
             .then(res => {
-                console.log(res)
-                if (res.status === 200 || res.status === 201) {
-                    localStorage.setItem(AUTH_TOKEN, res.data.token)
+                if (res) {
+                    router.push('/')
                 }
-            })
-            .then(() => {
-                router.push('/')
             })
     }
 

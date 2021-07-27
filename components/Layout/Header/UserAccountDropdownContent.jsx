@@ -4,6 +4,7 @@ import { DropdownButtonContext } from "../../../contexts/DropdownButtonContext"
 import { UserContext } from "../../../contexts/UserContext"
 import Button from "../../Common/Button"
 import { Box, Flex } from "../../Containers"
+import { logout } from '../../../services/authClient'
 
 
 const UserAccountDropdownContent = () => {
@@ -28,12 +29,25 @@ const UserAccountDropdownContent = () => {
             // width='100%'
         >
             { user ? (
-                <Box> <p>User is logged in</p></Box>
+                <Flex
+                    column
+                >
+                    <p>Minha Conta</p>
+                    <Button
+                        secondary
+                        onClick={() => {
+                            logout()
+                            router.reload()
+                        }}
+                    >
+                        Sair
+                    </Button>
+                </Flex>
                 ) : (
                 <Flex
                     column
                 >
-                    <p>User is not logged in</p>
+                    <p>Você ainda não entrou na sua conta</p>
                     <Button
                         small
                         margin='10px 0'
@@ -42,7 +56,7 @@ const UserAccountDropdownContent = () => {
                             router.push('/login')
                         }}
                     >
-                        Login
+                        Entrar
                     </Button>
                 </Flex>
             )}

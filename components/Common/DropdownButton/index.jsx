@@ -13,12 +13,12 @@ const DropdownButton = ({
     disabled,
     small,
     fontSize,
-    fullWidth, 
+    fullWidth,
     onClick,
     margin,
     padding
 }) => {
-    
+
     // const [showDropdown, setShowDropdown] = useState(false)
 
     const { showDropdown, setShowDropdown } = useContext(DropdownButtonContext)
@@ -31,7 +31,7 @@ const DropdownButton = ({
     //     console.log('top: ', top)
     //     console.log('left: ', left)
     // }, [top, left])
-    
+
 
     return (
         <>
@@ -44,67 +44,60 @@ const DropdownButton = ({
                 fontSize={fontSize}
                 // width={width}
                 fullWidth={fullWidth}
-                onMouseEnter={() => {
-                    const buttonElement = document.getElementById(id)
-                        setTop(buttonElement.getBoundingClientRect().top)
-                        setLeft(buttonElement.getBoundingClientRect().left)
-                        setButtonWidth(buttonElement.getBoundingClientRect().width)
-                        setShowDropdown(id)
-                }}
-                onMouseOver={() => {
-                    const buttonElement = document.getElementById(id)
-                    if (buttonElement && !showDropdown) {
-                        setTop(buttonElement.getBoundingClientRect().top)
-                        setLeft(buttonElement.getBoundingClientRect().left)
-                        setButtonWidth(buttonElement.getBoundingClientRect().width)
-                        setShowDropdown(id)
-                    }
-                }}
-                // onMouseLeave={() => {
+                // onMouseEnter={() => {
                 //     const buttonElement = document.getElementById(id)
-
                 //         setTop(buttonElement.getBoundingClientRect().top)
                 //         setLeft(buttonElement.getBoundingClientRect().left)
                 //         setButtonWidth(buttonElement.getBoundingClientRect().width)
-                //         setShowDropdown(false)
+                //         setShowDropdown(id)
                 // }}
-        //         onClick={() => {
-        //             const buttonElement = document.getElementById(id)
-        //             if (buttonElement) {
-        //                 // console.log('top: ', top)
-        //                 // console.log('buttonElement.getBoundingClientRect(): ', buttonElement.getBoundingClientRect())
-        // // console.log('left: ', left)
-
-        //                 setTop(buttonElement.getBoundingClientRect().top)
-        //                 setLeft(buttonElement.getBoundingClientRect().left)
-        //                 setButtonWidth(buttonElement.getBoundingClientRect().width)
-        //                 showDropdown === id ? setShowDropdown(false) : setShowDropdown(id)
-        //             }
-
-        //         }}
+                // onMouseOver={() => {
+                //     const buttonElement = document.getElementById(id)
+                //     if (buttonElement && !showDropdown) {
+                //         setTop(buttonElement.getBoundingClientRect().top)
+                //         setLeft(buttonElement.getBoundingClientRect().left)
+                //         setButtonWidth(buttonElement.getBoundingClientRect().width)
+                //         setShowDropdown(id)
+                //     }
+                // }}
+                // onClick={() => {
+                //     setShowDropdown(false)
+                // }}
+                onClick={() => {
+                    const buttonElement = document.getElementById(id)
+                    if (buttonElement) {
+                        // console.log('top: ', top)
+                        // console.log('buttonElement.getBoundingClientRect(): ', buttonElement.getBoundingClientRect())
+                        // console.log('left: ', left)
+                        setTop(buttonElement.getBoundingClientRect().top)
+                        setLeft(buttonElement.getBoundingClientRect().left)
+                        setButtonWidth(buttonElement.getBoundingClientRect().width)
+                        showDropdown === id ? setShowDropdown(false) : setShowDropdown(id)
+                    }
+                }}
                 margin={margin}
                 padding={padding}
             >
                 {label}
             </StyledButton>
-            { showDropdown === id && (
+            {showDropdown === id && (
                 <DropDownContainer
                     top={top}
                     left={left}
                     buttonWidth={buttonWidth}
-                    // onMouseOver={() => {
-                    //     const buttonElement = document.getElementById(id)
-                    //     if (buttonElement && !showDropdown) {
-                    //         setTop(buttonElement.getBoundingClientRect().top)
-                    //         setLeft(buttonElement.getBoundingClientRect().left)
-                    //         setButtonWidth(buttonElement.getBoundingClientRect().width)
-                    //         setShowDropdown(id)
-                    //     }
-                    // }}
+                // onMouseOver={() => {
+                //     const buttonElement = document.getElementById(id)
+                //     if (buttonElement && !showDropdown) {
+                //         setTop(buttonElement.getBoundingClientRect().top)
+                //         setLeft(buttonElement.getBoundingClientRect().left)
+                //         setButtonWidth(buttonElement.getBoundingClientRect().width)
+                //         setShowDropdown(id)
+                //     }
+                // }}
                 >
                     <div className='triangle'></div>
                     <div className='card'>
-                        { children }
+                        {children}
                     </div>
                 </DropDownContainer>
             )}

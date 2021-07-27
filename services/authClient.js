@@ -1,3 +1,4 @@
+import { AUTH_TOKEN } from "../utils/constants"
 import { apiClient } from "./apiClient"
 
 
@@ -24,7 +25,22 @@ export const login = (userLogin) => {
 
     return apiClient('post', '/users/login', reqData)
         .then(res => {
-            console.log('res: ', res)
-            return res
+            console.log(res)
+            if (res.status === 200 || res.status === 201) {
+                localStorage.setItem(AUTH_TOKEN, res.data.token)
+                return res
+            }
         })
+}
+
+
+export const logout = () => {
+    localStorage.removeItem(AUTH_TOKEN)
+    const didNotLogout = localStorage.getItem(AUTH_TOKEN)
+
+    if (didNotLogout) {
+        return false
+    } else {
+        return true
+    }
 }
