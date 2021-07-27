@@ -60,14 +60,14 @@ const DropdownButton = ({
                         setShowDropdown(id)
                     }
                 }}
-                onMouseLeave={() => {
-                    const buttonElement = document.getElementById(id)
+                // onMouseLeave={() => {
+                //     const buttonElement = document.getElementById(id)
 
-                        setTop(buttonElement.getBoundingClientRect().top)
-                        setLeft(buttonElement.getBoundingClientRect().left)
-                        setButtonWidth(buttonElement.getBoundingClientRect().width)
-                        setShowDropdown(false)
-                }}
+                //         setTop(buttonElement.getBoundingClientRect().top)
+                //         setLeft(buttonElement.getBoundingClientRect().left)
+                //         setButtonWidth(buttonElement.getBoundingClientRect().width)
+                //         setShowDropdown(false)
+                // }}
         //         onClick={() => {
         //             const buttonElement = document.getElementById(id)
         //             if (buttonElement) {
@@ -92,6 +92,15 @@ const DropdownButton = ({
                     top={top}
                     left={left}
                     buttonWidth={buttonWidth}
+                    // onMouseOver={() => {
+                    //     const buttonElement = document.getElementById(id)
+                    //     if (buttonElement && !showDropdown) {
+                    //         setTop(buttonElement.getBoundingClientRect().top)
+                    //         setLeft(buttonElement.getBoundingClientRect().left)
+                    //         setButtonWidth(buttonElement.getBoundingClientRect().width)
+                    //         setShowDropdown(id)
+                    //     }
+                    // }}
                 >
                     <div className='triangle'></div>
                     <div className='card'>
