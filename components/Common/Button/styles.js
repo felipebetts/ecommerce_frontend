@@ -6,6 +6,7 @@ export const StyledButton = styled.button`
     ${(props) => props.fullWidth ? 'width: 100%;' : ''}
     ${(props) => props.width ? `width: ${props.width};` : ''}
     height: 64px;
+    ${(props) => props.height ? `height: ${props.height};` : ''}
 
     ${(props) => props.padding ? `padding: ${props.padding};` : ''}
     
